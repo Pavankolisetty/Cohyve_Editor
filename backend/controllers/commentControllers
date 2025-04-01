@@ -1,0 +1,15 @@
+const updateCommentStatus = async (req, res) => {
+  try {
+    const { designId, commentId } = req.params;
+    const { status } = req.body;
+
+    // Update the comment status in the database
+    const updatedComment = await Comment.findByIdAndUpdate(commentId, { status }, { new: true });
+
+    res.json(updatedComment);
+  } catch (error) {
+    res.status(500).json({ error: 'Error updating comment status' });
+  }
+};
+
+module.exports = { updateCommentStatus };
